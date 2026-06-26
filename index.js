@@ -1,4 +1,4 @@
-const input = document.querySelector(".submit__input");
+const input = document.querySelector("#submit__input");
 const button = document.querySelector(".submit__input--button");
 const movieList = document.querySelector(".movie__list");
 
