@@ -4,17 +4,17 @@
 }
 
 header {
-    width: 100%;
     max-width: 1600px;
-    height: 300px;
+    height: 200px;
     padding: 12px;
+    margin: 12px;
     background-color: #edebdd;
     box-sizing: border-box;
     display: flex;
-    align-items: top;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .header__img {
@@ -53,4 +53,34 @@ header {
 
 .submit__input--button {
     cursor: pointer;
+}
+
+/* RESULTS */
+
+.container {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.movie__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 12px;  
+}
+
+.movie__list img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;  
+}
+
+.movie {
+    flex: 0 0 calc(33.333% - 20px);
+    text-align: center;
+    line-height: 1.5;
 }
