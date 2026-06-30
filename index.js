@@ -2,6 +2,38 @@ const input = document.querySelector("#submit__input");
 const button = document.querySelector(".submit__input--button");
 const movieList = document.querySelector(".movie__list");
 
+document.addEventListener("DOMContentLoaded", () => {
+  loadDefaultMovies();
+});
+
+async function loadDefaultMovies() {
+  const defaultSearch = "avengers";
+
+  try {
+    const response = await fetch(
+      `https://www.omdbapi.com/?apikey=5c69f0b2&s=${defaultSearch}`
+);
+
+
+    const data = await response.json();
+
+    if (data.Search) {
+      const sorted = data.Search.sort((a, b) =>
+        a.Title.localeCompare(b.Title)
+      );
+
+      const firstSix = sorted.slice(0, 6);
+
+      displayMovies(firstSix);
+    }
+    console.log("API response:", data);
+  } 
+  
+  catch (error) {
+    console.error("Error loading default movies:", error);
+  }
+}
+
 async function searchMovies() {
   const query = input.value.trim();
   if (!query) return;
@@ -22,7 +54,7 @@ async function searchMovies() {
 }
 
 function displayMovies(movies) {
-  movieList.innerHTML = ""; // clear old results
+  movieList.innerHTML = "";
 
   const firstSix = movies.slice(0, 6)
 
@@ -40,12 +72,13 @@ function displayMovies(movies) {
   });
 }
 
-// Press Enter to search
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     searchMovies();
   }
 });
 
-// Click icon to search
+
 button.addEventListener("click", searchMovies);
+
+
