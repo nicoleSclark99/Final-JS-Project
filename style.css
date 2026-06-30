@@ -54,7 +54,7 @@ header {
 }
 
 .submit {
-    margin-top: 20px;
+    margin-top: 18px;
     position: relative;
     display: flex;
     align-items: center;
@@ -81,6 +81,23 @@ header {
     color: black;
 }
 
+.select__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    margin-bottom: 18px;
+}
+
+.select {
+    height: 32px;
+    max-width: 200px;
+    background-color: #edebdd;
+    border-radius: 6px;
+    border: 2px solid black;
+   
+}
+
 /* 
 
     RESULTS 
@@ -99,7 +116,7 @@ header {
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 12px;  
+    padding: 24px 12px 12px 12px;  
 }
 
 .movie__list img {

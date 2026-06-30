@@ -1,9 +1,18 @@
+let currentMovies = [];
 const input = document.querySelector("#submit__input");
 const button = document.querySelector(".submit__input--button");
 const movieList = document.querySelector(".movie__list");
 
 document.addEventListener("DOMContentLoaded", () => {
   loadDefaultMovies();
+});
+
+document.getElementById("sortSelect").addEventListener("change", (e) => {
+  const sortType = e.target.value;
+
+  const sorted = sortMovies([...currentMovies], sortType);
+
+  displayMovies(sorted);
 });
 
 async function loadDefaultMovies() {
@@ -24,9 +33,9 @@ async function loadDefaultMovies() {
 
       const firstSix = sorted.slice(0, 6);
 
-      displayMovies(firstSix);
+      currentMovies = firstSix;
+      displayMovies(currentMovies);
     }
-    console.log("API response:", data);
   } 
   
   catch (error) {
@@ -47,8 +56,11 @@ async function searchMovies() {
       return;
     }
 
-    displayMovies(data.Search);
-  } catch (error) {
+    currentMovies = data.Search;
+    displayMovies(currentMovies);
+  } 
+  
+  catch (error) {
     console.error("Error:", error);
   }
 }
@@ -56,9 +68,7 @@ async function searchMovies() {
 function displayMovies(movies) {
   movieList.innerHTML = "";
 
-  const firstSix = movies.slice(0, 6)
-
-  firstSix.forEach(movie => {
+  movies.slice(0, 6).forEach(movie => {
     const movieItem = document.createElement("div");
     movieItem.classList.add("movie");
 
@@ -72,6 +82,7 @@ function displayMovies(movies) {
   });
 }
 
+
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     searchMovies();
@@ -80,5 +91,18 @@ input.addEventListener("keydown", (e) => {
 
 
 button.addEventListener("click", searchMovies);
+
+
+function sortMovies(movies, sortType) {
+  if (sortType === "oldest") {
+    return movies.sort((a, b) => Number(a.Year) - Number(b.Year));
+  }
+
+  if (sortType === "newest") {
+    return movies.sort((a, b) => Number(b.Year) - Number(a.Year));
+  }
+
+  return movies;
+}
 
 
