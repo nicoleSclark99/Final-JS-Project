@@ -43,9 +43,29 @@ async function loadDefaultMovies() {
   }
 }
 
+const loader = document.getElementById("loading-screen");
+const searchInput = document.getElementById("submit__input"); 
+const searchButton = document.getElementsByClassName("submit__input--button")[0]; 
+
+
+function showLoader() {
+  loader.style.display = "flex";   
+  loader.style.opacity = "1";      
+}
+
+function hideLoader() {
+  loader.style.opacity = "0";      
+  setTimeout(() => {
+    loader.style.display = "none";
+  }, 300);
+}
+
+
 async function searchMovies() {
   const query = input.value.trim();
   if (!query) return;
+
+  showLoader(); 
 
    try {
     const response = await fetch(`https://www.omdbapi.com/?apikey=5c69f0b2&s=${query}`);
@@ -53,6 +73,8 @@ async function searchMovies() {
 
     if (data.Response === "False") {
       movieList.innerHTML = `<p>No results found.</p>`;
+      hideLoader(); 
+    
       return;
     }
 
@@ -63,6 +85,10 @@ async function searchMovies() {
   catch (error) {
     console.error("Error:", error);
   }
+
+  setTimeout(() => {
+  hideLoader();
+}, 400); 
 }
 
 function displayMovies(movies) {

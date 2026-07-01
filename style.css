@@ -3,7 +3,33 @@
     margin: 0;
 }
 
-/* 
+/*
+
+    LOADING SCREEN
+
+*/
+
+#loading-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #edebdd;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#loading-screen i {
+    font-size: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+/*
 
     HEADER 
     
