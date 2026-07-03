@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadDefaultMovies();
 });
 
+
 document.getElementById("sortSelect").addEventListener("change", (e) => {
   const sortType = e.target.value;
 
@@ -14,6 +15,25 @@ document.getElementById("sortSelect").addEventListener("change", (e) => {
 
   displayMovies(sorted);
 });
+
+function sortMovies(movieArray, order) {
+  if (order === "oldest") {
+    movieArray.sort((a, b) => a.Year - b.Year);
+  } 
+  else if (order === "newest") {
+    movieArray.sort((a, b) => b.Year - a.Year);
+  }
+  else if (order === "az") {
+    movieArray.sort((a, b) => a.Title.localeCompare(b.Title));
+  }
+  else if (order === "za") {
+    movieArray.sort((a, b) => b.Title.localeCompare(a.Title));
+  }
+
+  return movieArray;
+}
+
+
 
 async function loadDefaultMovies() {
   const defaultSearch = "avengers";
@@ -27,13 +47,7 @@ async function loadDefaultMovies() {
     const data = await response.json();
 
     if (data.Search) {
-      const sorted = data.Search.sort((a, b) =>
-        a.Title.localeCompare(b.Title)
-      );
-
-      const firstSix = sorted.slice(0, 6);
-
-      currentMovies = firstSix;
+      currentMovies = data.Search;
       displayMovies(currentMovies);
     }
   } 
@@ -117,18 +131,4 @@ input.addEventListener("keydown", (e) => {
 
 
 button.addEventListener("click", searchMovies);
-
-
-function sortMovies(movies, sortType) {
-  if (sortType === "oldest") {
-    return movies.sort((a, b) => Number(a.Year) - Number(b.Year));
-  }
-
-  if (sortType === "newest") {
-    return movies.sort((a, b) => Number(b.Year) - Number(a.Year));
-  }
-
-  return movies;
-}
-
 

@@ -232,3 +232,48 @@ footer {
     padding-top: 12px;
     font-size: 14px;
 }
+
+/* 
+
+    MEDIA QUERIES 
+    
+*/
+
+@media (max-width: 768px) {
+    .movie {
+        flex: 0 0 calc(50% - 20px);
+    }
+
+    .row__submit {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .select__wrapper {
+        margin: 0;
+    }
+
+    #submit__input {
+        margin-left: 0;
+    }
+
+    .hidden {
+        margin-top: 0;
+        height: 0;
+        padding: 0;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .movie {
+        flex: 0 0 calc(100% - 20px);
+    }
+
+    .hidden {
+        margin-top: 0;
+        height: 0;
+        padding: 0;
+    }
+}
